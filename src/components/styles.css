@@ -1,0 +1,13 @@
+.btn-picture {
+  position: absolute;
+  top: 48%;
+  left: 51%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  background: transparent;
+  border: hidden;
+  border-radius: 30%;
+  height: 27%;
+  width: 23%;
+  outline: none;
+}

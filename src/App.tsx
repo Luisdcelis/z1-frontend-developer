@@ -1,26 +1,28 @@
-import React from 'react';
-import './App.css';
-import  NavBar from './components/NavBar'
+import React, { useState } from "react";
+import "./App.css";
+import NavBar from "./components/NavBar";
+import TakePictureButton from "./components/TakePictureButton";
+import ModalCam from "./components/ModalCam/index"
 
 function App() {
-  return (
-    <div style={{backgroundColor: "lightgray"}}>
-      <div style={{marginLeft: 500, marginRight: 500, backgroundColor: "white"}}>
-        <NavBar />
+  const [open, setOpen] = useState(false);
 
-        <div style={{textAlign: "center"}}>
-          <br/>
-          <h1>
-            Scan your ID
-          </h1>
-          <br/>
-          <div style={{fontSize: 22}}>
-            Take a picture. It may take time to validate your personal information
+  return (
+      open ? (
+        <ModalCam />
+      ) : (
+        <>
+          <NavBar />
+          <div style={{ textAlign: "center" }}>
+            <h1 style={{ margin: "40px 0" }}>Scan your ID</h1>
+            <div style={{ fontSize: 22, marginBottom: "20px" }}>
+              Take a picture. It may take time to validate your personal
+              information
+            </div>
+            <TakePictureButton openModal={() => setOpen(!open)} />
           </div>
-          
-        </div>
-      </div>
-    </div>
+        </>
+      )
   );
 }
 
