@@ -10,6 +10,20 @@
   top: 0%;
 }
 
+.button-retake {
+  position: absolute;
+  z-index: 1;
+  color: white;
+  background-color: rgb(43, 0, 118);
+  outline: none;
+  border: hidden;
+  border-radius: 50px;
+  font-size: 50;
+  padding: 30px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
 .button-cancel {
   cursor: pointer;
   background: transparent;
@@ -19,4 +33,27 @@
   font-size: larger;
   font-weight: bolder;
   margin-top: 40px;
+}
+
+.photo {
+  position: absolute;
+  border: 4px solid;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.photo-red {
+  border-color: red;
+}
+
+.photo-green {
+  border-color: lightgreen;
+}
+
+.img-container {
+  position: relative;
+  height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

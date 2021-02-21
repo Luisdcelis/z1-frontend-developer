@@ -1,41 +1,76 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import Webcam from "react-webcam";
 import "./index.css";
+import { sendPicture, ResponseType } from "../../services/api";
 
 interface ModalCamProps {
   closeModal: () => void;
+  imgSrc: string | null;
+  setImage: (newImageSrc: string | null) => void;
+  response: ResponseType | undefined;
+  setResponse: (newResponse: ResponseType) => void;
 }
 
-function ModalCam({ closeModal }: ModalCamProps) {
+function ModalCam({
+  closeModal,
+  imgSrc,
+  setImage,
+  response,
+  setResponse,
+}: ModalCamProps) {
+  const webcamRef = useRef<Webcam>(null);
+
+  const capture = useCallback(() => {
+    if (webcamRef.current) {
+      const img = webcamRef.current.getScreenshot();
+      setImage(img);
+    }
+  }, [webcamRef, setImage]);
+
   useEffect(() => {
     const interval = setInterval(() => {
-      console.log("holaaaa");
-    }, 1000);
+      capture();
+    }, 2000);
     return () => clearInterval(interval);
   }, []);
 
-  const webcamRef = React.useRef<Webcam>(null);
-  const [imgSrc, setImgSrc] = React.useState<string | null>(null);
-  const capture = React.useCallback(() => {
-    const imageSrc = webcamRef.current.getScreenshot();
-    setImgSrc(imageSrc);
-  }, [webcamRef, setImgSrc]);
+  useEffect(() => {
+    if (imgSrc) {
+      (async () => {
+        const res = await sendPicture(imgSrc);
+        setResponse(res);
+        if (res.summary.outcome === "Approved") {
+          closeModal();
+        }
+      })();
+    }
+  }, [imgSrc]);
 
   return (
-    <div style={{ textAlign: "center" }}>
+    <div className="container">
       <h1 style={{ color: "white" }}>Take picture</h1>
       <p style={{ color: "white" }}>Fit your ID card inside the frame</p>
       <p style={{ color: "white" }}>The picture will be taken automatically</p>
-      <div className="container">
-        <Webcam
-          audio={false}
-          ref={webcamRef}
-          screenshotFormat="image/jpeg"
-          style={{ borderRadius: "15px", height: "90%" }}
-        />
-        <div className="borderCard" />
-      </div>
-      <p>aqui va el tectto</p>
+      <Webcam
+        audio={false}
+        ref={webcamRef}
+        height={400}
+        screenshotFormat="image/jpeg"
+        className={
+          response?.summary.outcome !== "Approved"
+            ? "border border-red"
+            : "border  border-green"
+        }
+      />
+      <p
+        className={
+          response?.summary.outcome !== "Approved"
+            ? "paragraph red"
+            : "paragraph green"
+        }
+      >
+        {response?.summary.outcome}
+      </p>
       <button className="button-cancel" onClick={closeModal}>
         CANCEL
       </button>
