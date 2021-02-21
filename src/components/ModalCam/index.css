@@ -1,7 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  height: 50vh;
+  height: 60vh;
   width: 100vw;
   justify-content: center;
   align-items: center;
@@ -12,6 +12,6 @@
   border: 3px dashed #000;
   position: absolute;
   z-index: 1;
-  width: 280px;
+  width: 290px;
   height: 38%;
 }
