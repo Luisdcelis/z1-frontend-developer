@@ -8,13 +8,14 @@ interface ModalCamProps {
 
 function ModalCam({ closeModal }: ModalCamProps) {
   useEffect(() => {
-    setTimeout(() => {
-      console.log("Hello, World!");
-    }, 3000);
+    const interval = setInterval(() => {
+      console.log("holaaaa");
+    }, 1000);
+    return () => clearInterval(interval);
   }, []);
 
-  const webcamRef = React.useRef(null);
-  const [imgSrc, setImgSrc] = React.useState(null);
+  const webcamRef = React.useRef<Webcam>(null);
+  const [imgSrc, setImgSrc] = React.useState<string | null>(null);
   const capture = React.useCallback(() => {
     const imageSrc = webcamRef.current.getScreenshot();
     setImgSrc(imageSrc);
