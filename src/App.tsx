@@ -46,6 +46,28 @@ function App() {
                     : "photo  photo-green"
                 }
               />
+              <div
+                style={{
+                  backgroundColor:
+                    response?.summary.outcome === "Approved"
+                      ? "lightgreen"
+                      : "red",
+                  width: "100px",
+                  padding: "5px 10px",
+                  borderRadius: "10px",
+                  zIndex: 1,
+                  position: "absolute",
+                  right: "36vw",
+                  bottom: "8vh",
+                  fontWeight: "bold",
+                }}
+              >
+                {response?.summary.outcome === "Approved" ? (
+                  <p>ACCEPTED</p>
+                ) : (
+                  <p>REJECTED</p>
+                )}
+              </div>
               {response?.summary.outcome !== "Approved" && (
                 <button
                   onClick={() => setOpen(!open)}
@@ -53,23 +75,6 @@ function App() {
                 >
                   RETAKE PICTURE
                 </button>
-              )}
-            </div>
-            <div
-              style={{
-                backgroundColor:
-                  response?.summary.outcome === "Approved"
-                    ? "lightgreen"
-                    : "red",
-                width: "100px",
-                padding: "5px 10px",
-                borderRadius: "30px",
-              }}
-            >
-              {response?.summary.outcome === "Approved" ? (
-                <p>ACCEPTED</p>
-              ) : (
-                <p>REJECTED</p>
               )}
             </div>
           </>

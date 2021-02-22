@@ -39,6 +39,7 @@ function ModalCam({
       (async () => {
         const res = await sendPicture(imgSrc);
         setResponse(res);
+        console.log(res);
         if (res.summary.outcome === "Approved") {
           closeModal();
         }
