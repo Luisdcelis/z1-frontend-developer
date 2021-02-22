@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import NavBar from "./components/Navbar";
-import TakePictureButton from "./components/TakePictureButton";
+import TakePictureButton from "./components/TakePictureButton/index";
 import ModalCam from "./components/ModalCam/index";
 import Desktop from "./assets/desktop.jpg";
 import { ResponseType } from "./services/api";
@@ -47,20 +47,11 @@ function App() {
                 }
               />
               <div
-                style={{
-                  backgroundColor:
-                    response?.summary.outcome === "Approved"
-                      ? "lightgreen"
-                      : "red",
-                  width: "100px",
-                  padding: "5px 10px",
-                  borderRadius: "10px",
-                  zIndex: 1,
-                  position: "absolute",
-                  right: "36vw",
-                  bottom: "8vh",
-                  fontWeight: "bold",
-                }}
+                className={
+                  response?.summary.outcome === "Approved"
+                    ? "status status-green"
+                    : "status status-red"
+                }
               >
                 {response?.summary.outcome === "Approved" ? (
                   <p>ACCEPTED</p>

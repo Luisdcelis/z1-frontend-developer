@@ -1,5 +1,4 @@
 import axios from "axios";
-import { reverse } from "dns";
 
 export interface ResponseType {
   summary: {

@@ -1,6 +1,6 @@
 import React from "react";
-import CardImage from "../assets/CardImage.png";
-import "./styles.css";
+import CardImage from "../../assets/CardImage.png";
+import "./index.css";
 
 interface TakePictureButtonProps {
   openModal: () => void;

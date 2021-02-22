@@ -32,7 +32,7 @@ function ModalCam({
       capture();
     }, 2000);
     return () => clearInterval(interval);
-  }, []);
+  });
 
   useEffect(() => {
     if (imgSrc) {
